@@ -1,0 +1,32 @@
+{
+  "categories": {
+    "default": {
+      "name": "默认笔记",
+      "file": "/home/pi/.openclaw/workspace/notes/notes.csv",
+      "cloud_path": "/apps/notes/"
+    },
+    "育儿": {
+      "name": "育儿笔记",
+      "file": "/home/pi/.openclaw/workspace/notes/parenting.csv",
+      "cloud_path": "/apps/parenting_notes/"
+    },
+    "工作": {
+      "name": "工作日志",
+      "file": "/home/pi/.openclaw/workspace/notes/work.csv",
+      "cloud_path": "/apps/work/"
+    },
+    "读书": {
+      "name": "读书笔记",
+      "file": "/home/pi/.openclaw/workspace/notes/books.csv",
+      "cloud_path": "/apps/books/"
+    }
+  },
+  "jianguoyun": {
+    "host": "dav.jianguoyun.com",
+    "base": "/dav/oc-app-data"
+  },
+  "retry": {
+    "max_attempts": 3,
+    "backoff_factor": 1
+  }
+}
