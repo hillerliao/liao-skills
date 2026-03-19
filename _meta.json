@@ -1,8 +1,0 @@
-{
-  "name": "quick-notes",
-  "version": "2.0.0",
-  "description": "通用速记技能 - 支持多分类的笔记记录与同步",
-  "author": "OpenClaw",
-  "trigger": ["#笔记", "速记"],
-  "required_env": ["JIANGUOYUN_EMAIL", "JIANGUOYUN_PASSWORD"]
-}
