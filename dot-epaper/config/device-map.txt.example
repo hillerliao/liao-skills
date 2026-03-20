@@ -1,0 +1,10 @@
+# Device mapping configuration
+# Format: <alias>:<device_id>
+#
+# Get your device ID from the Dot app:
+# Device Settings → API → Device ID
+#
+# Examples:
+# living_room:YOUR_DEVICE_ID_1
+# bedroom:YOUR_DEVICE_ID_2
+# kitchen:YOUR_DEVICE_ID_3

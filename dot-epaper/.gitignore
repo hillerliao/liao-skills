@@ -1,16 +1,13 @@
 # Logs
-logs/*.log
-logs/*.txt
+logs/
 
-# Config (user-specific)
+# User-specific config (copy from .example)
 config/device-map.txt
 
 # IDE
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
 
 # OS
 .DS_Store

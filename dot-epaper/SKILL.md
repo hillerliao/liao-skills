@@ -1,67 +1,65 @@
+---
+name: dot-epaper
+description: Push text and poetry to Dot e-ink devices via direct API. Use when user wants to send text, poetry, or notifications to Dot e-ink display devices.
+---
+
 # Dot E-ink Display Push
 
-Push text and poetry to Dot e-ink devices via direct API.
+Push text, poetry, and notifications to Dot e-ink devices via direct API.
 
-## Features
-
-- 📱 Push to multiple Dot devices (toilet, fridge, etc.)
-- 📜 Support for poetry and text messages
-- 🔄 Push to all devices at once
-- 📝 Logging of push history
-- ⏱️ Timeout protection
-- 🔒 Credentials loaded from environment
-
-## Installation
+## Quick Start
 
 ```bash
-clawhub install dot-epaper
+# Configure your device mapping first
+cp config/device-map.txt.example config/device-map.txt
+# Edit config/device-map.txt with your device IDs
+
+# Set API key in environment
+export DOT_API_KEY=your_api_key_here
+
+# Push to device
+./scripts/dot-send.sh <device> <title> <message> [signature]
+
+# Examples
+./scripts/dot-send.sh toilet "村居" "草长莺飞二月天..." "清·高鼎"
+./scripts/dot-send.sh fridge "江南春" "千里莺啼绿映红..." "唐代·杜牧"
+./scripts/dot-send.sh all "标题" "内容" "作者"
 ```
 
 ## Configuration
 
-Set these in your `.env`:
+### 1. Get API Credentials
+
+1. Open Dot app → Device Settings → API
+2. Enable "Text API" content type
+3. Copy API Key and Device ID
+
+### 2. Set Environment Variable
 
 ```bash
-# Dot API credentials
+export DOT_API_KEY=your_api_key_here
+```
+
+Or add to `~/.openclaw/.env`:
+```
 DOT_API_KEY=your_api_key_here
-DOT_DEVICE_ID=your_default_device_id
 ```
 
-Device mapping is configured in `config/device-map.txt`:
+### 3. Configure Devices
+
+Copy and edit `config/device-map.txt.example`:
 ```
-toilet:48F6EE576924
-fridge:B43A455B9660
-```
-
-## Usage
-
-```bash
-# Push to specific device
-dot-send toilet "村居" "草长莺飞二月天..." "清·高鼎"
-dot-send fridge "江南春" "千里莺啼..." "唐代·杜牧"
-
-# Push to all devices
-dot-send all "标题" "内容" "作者"
-
-# Show help
-dot-send help
+# Format: <alias>:<device_id>
+living_room:YOUR_DEVICE_ID
+bedroom:YOUR_DEVICE_ID
 ```
 
-## Available Commands
+## API Limits
 
-| Command | Description |
-|---------|-------------|
-| `toilet` | Push to toilet device |
-| `fridge` | Push to fridge device |
-| `all` | Push to all devices |
-| `help` | Show usage |
+- Title: max 10 characters
+- Message: max 40 characters
+- Signature: max 10 characters
 
-## Requirements
+## Troubleshooting
 
-- Dot e-ink device with Text API enabled
-- API key from Dot app
-- curl command
-
-## License
-
-MIT
+See [references/troubleshooting.md](references/troubleshooting.md) for common issues.

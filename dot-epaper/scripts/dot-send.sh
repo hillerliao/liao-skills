@@ -1,15 +1,6 @@
 #!/bin/bash
 # Dot E-ink device push script
-# Part of dot-epaper skill for OpenClaw
-#
-# Usage:
-#   dot-send <device> <title> <message> [signature]
-#   dot-send help
-#
-# Examples:
-#   dot-send toilet "村居" "草长莺飞二月天..." "清·高鼎"
-#   dot-send fridge "江南春" "千里莺啼绿映红..." "唐代·杜牧"
-#   dot-send all "标题" "内容" "作者"
+# Part of dot-epaper skill
 
 set -euo pipefail
 
@@ -34,22 +25,22 @@ MAX_SIGNATURE_LEN=10
 MAX_RETRIES=3
 RETRY_DELAY=2
 
-# Check dependencies
-command -v curl >/dev/null 2>&1 || { echo "Error: curl is required but not installed."; exit 1; }
-
 # Load credentials
 if [ -f "$HOME/.openclaw/.env" ]; then
     source "$HOME/.openclaw/.env"
 fi
 
+# Check dependencies
+command -v curl >/dev/null 2>&1 || { echo "Error: curl is required but not installed."; exit 1; }
+
 # Escape special characters for JSON
 json_escape() {
     local str="$1"
-    str="${str//\\/\\\\}"    # Backslash
-    str="${str//\"/\\\"}"    # Quote
-    str="${str//$'\n'/\\n}"  # Newline
-    str="${str//$'\r'/}"     # Carriage return
-    str="${str//$'\t'/\\t}"  # Tab
+    str="${str//\\/\\\\}"
+    str="${str//\"/\\\"}"
+    str="${str//$'\n'/\\n}"
+    str="${str//$'\r'/}"
+    str="${str//$'\t'/\\t}"
     echo "$str"
 }
 
@@ -59,7 +50,7 @@ validate_length() {
     local value="$2"
     local max="$3"
     
-    local len=$(echo -n "$value" | wc -m)  # -m counts characters, not bytes
+    local len=$(echo -n "$value" | wc -m)
     if [ "$len" -gt "$max" ]; then
         echo "Error: $name too long ($len > $max chars): '$value'"
         return 1
@@ -134,12 +125,10 @@ send_to_device() {
         return 1
     fi
 
-    # Escape special characters
     title=$(json_escape "$title")
     message=$(json_escape "$message")
     signature=$(json_escape "$signature")
 
-    # Validate lengths
     validate_length "Title" "$title" "$MAX_TITLE_LEN" || return 1
     validate_length "Message" "$message" "$MAX_MESSAGE_LEN" || return 1
     if [ -n "$signature" ]; then
