@@ -1,11 +1,22 @@
 ---
 name: dot-epaper
-description: Push text and poetry to Dot e-ink devices via direct API. Use when user wants to send text, poetry, or notifications to Dot e-ink display devices.
+description: Push any text content to Dot e-ink devices via direct API. Use when user wants to send text, poetry, weather, reminders, notifications, or any content to Dot e-ink display devices.
 ---
 
 # Dot E-ink Display Push
 
-Push text, poetry, and notifications to Dot e-ink devices via direct API.
+Push any text content to Dot e-ink devices via direct API.
+
+## Use Cases
+
+- 📜 **古诗词** - 冰箱贴、卫生间显示诗词
+- 🌤️ **天气** - 今日天气、明日预报
+- ✅ **待办** - 今日待办事项
+- 📦 **快递** - 物流状态提醒
+- 📊 **股票** - 行情提醒
+- ⏰ **提醒** - 会议、午睡、服药提醒
+- 💬 **便签** - 留言板功能
+- 📰 **摘要** - 新闻、文章摘要
 
 ## Quick Start
 
@@ -19,11 +30,25 @@ export DOT_API_KEY=your_api_key_here
 
 # Push to device
 ./scripts/dot-send.sh <device> <title> <message> [signature]
+```
 
-# Examples
-./scripts/dot-send.sh toilet "村居" "草长莺飞二月天..." "清·高鼎"
-./scripts/dot-send.sh fridge "江南春" "千里莺啼绿映红..." "唐代·杜牧"
-./scripts/dot-send.sh all "标题" "内容" "作者"
+## Examples
+
+```bash
+# Push poetry
+./scripts/dot-send.sh fridge "江南春" "千里莺啼绿映红，水村山郭酒旗风。南朝四百八十寺，多少楼台烟雨中。" "唐代·杜牧"
+
+# Push weather
+./scripts/dot-send.sh bedroom "今日天气" "晴 20-28°C" ""
+
+# Push reminder
+./scripts/dot-send.sh toilet "会议提醒" "14:00 周会" ""
+
+# Push package status
+./scripts/dot-send.sh fridge "快递" "已到驿站" ""
+
+# Push to all devices
+./scripts/dot-send.sh all "标题" "内容" ""
 ```
 
 ## Configuration
@@ -50,8 +75,9 @@ DOT_API_KEY=your_api_key_here
 Copy and edit `config/device-map.txt.example`:
 ```
 # Format: <alias>:<device_id>
-living_room:YOUR_DEVICE_ID
-bedroom:YOUR_DEVICE_ID
+fridge:YOUR_FRIDGE_DEVICE_ID
+toilet:YOUR_TOILET_DEVICE_ID
+bedroom:YOUR_BEDROOM_DEVICE_ID
 ```
 
 ## API Limits
