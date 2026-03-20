@@ -1,0 +1,21 @@
+# Logs
+logs/*.log
+logs/*.txt
+
+# Config (user-specific)
+config/device-map.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local

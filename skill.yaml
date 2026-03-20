@@ -1,0 +1,32 @@
+name: dot-epaper
+description: Push text and poetry to Dot e-ink devices via API
+version: "1.0.0"
+author: hillerliao
+type: skill
+tags: [dot, e-ink, display, poetry, notification]
+homepage: https://github.com/hillerliao/dot-epaper-skill
+license: MIT
+
+commands:
+  - name: dot-send
+    script: scripts/dot-send.sh
+    description: Send text to Dot e-ink device
+    arguments:
+      - name: device
+        required: true
+        description: Device name (toilet/fridge/all)
+      - name: title
+        required: true
+        description: Message title
+      - name: message
+        required: true
+        description: Message content
+      - name: signature
+        required: false
+        description: Author/signature
+
+environment:
+  required:
+    - DOT_API_KEY
+  optional:
+    - DOT_DEVICE_ID
