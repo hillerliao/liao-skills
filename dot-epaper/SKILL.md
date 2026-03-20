@@ -1,6 +1,6 @@
 ---
 name: dot-epaper
-description: Push any text content to Dot e-ink devices via direct API. Use when user wants to send text, poetry, weather, reminders, notifications, or any content to Dot e-ink display devices.
+description: Push any text content to Dot e-ink devices via direct API. Use when user wants to send text, notes, labels, status, or any static content to Dot e-ink display devices.
 ---
 
 # Dot E-ink Display Push
@@ -9,14 +9,13 @@ Push any text content to Dot e-ink devices via direct API.
 
 ## Use Cases
 
-- 📜 **古诗词** - 冰箱贴、卫生间显示诗词
-- 🌤️ **天气** - 今日天气、明日预报
-- ✅ **待办** - 今日待办事项
-- 📦 **快递** - 物流状态提醒
-- 📊 **股票** - 行情提醒
-- ⏰ **提醒** - 会议、午睡、服药提醒
-- 💬 **便签** - 留言板功能
-- 📰 **摘要** - 新闻、文章摘要
+- 📜 **诗词** - 每天一首诗，冰箱上的诗意
+- 💬 **便签** - 留言提醒，"下班记得接孩子"
+- 🏷️ **标签** - 冰箱物品记录，"鸡蛋：3个"
+- 📝 **状态** - 办公状态，"工作中请勿打扰"
+- 💡 **语录** - 每日一言、励志句子
+- 📢 **公告** - 家庭/团队通知
+- 🎯 **目标** - 每日目标展示
 
 ## Quick Start
 
@@ -35,17 +34,23 @@ export DOT_API_KEY=your_api_key_here
 ## Examples
 
 ```bash
-# Push poetry
+# Push poetry (诗词)
 ./scripts/dot-send.sh fridge "江南春" "千里莺啼绿映红，水村山郭酒旗风。南朝四百八十寺，多少楼台烟雨中。" "唐代·杜牧"
 
-# Push weather
-./scripts/dot-send.sh bedroom "今日天气" "晴 20-28°C" ""
+# Leave a note (便签)
+./scripts/dot-send.sh toilet "提醒" "下班记得接孩子" ""
 
-# Push reminder
-./scripts/dot-send.sh toilet "会议提醒" "14:00 周会" ""
+# Fridge inventory (冰箱库存)
+./scripts/dot-send.sh fridge "库存" "鸡蛋：3个，牛奶：1盒" ""
 
-# Push package status
-./scripts/dot-send.sh fridge "快递" "已到驿站" ""
+# Working status (办公状态)
+./scripts/dot-send.sh bedroom "状态" "工作中，请勿打扰" ""
+
+# Daily quote (每日一言)
+./scripts/dot-send.sh bedroom "一言" "今天也要加油呀" ""
+
+# Family announcement (家庭公告)
+./scripts/dot-send.sh fridge "通知" "今晚8点家庭会议" ""
 
 # Push to all devices
 ./scripts/dot-send.sh all "标题" "内容" ""
@@ -85,6 +90,10 @@ bedroom:YOUR_BEDROOM_DEVICE_ID
 - Title: max 10 characters
 - Message: max 40 characters
 - Signature: max 10 characters
+
+## Note
+
+This skill pushes static text content to the device. It does not include timing, notifications, or alerts. The content remains displayed until you push new content.
 
 ## Troubleshooting
 
